@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP - Ahana</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: rgba(26, 31, 58, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .modal {
+            display: flex;
+            width: 860px;
+            height: 480px;
+            max-width: 95%;
+            background-color: #ebf4f6;
+            border-radius: 12px;
+            overflow: visible;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            width: 28px;
+            height: 28px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+
+        .close-btn:hover {
+            background: #f1f1f1;
+        }
+
+        .left-panel {
+            flex: 1.25;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .brand-header {
+            margin-bottom: 25px;
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: #1a1f3a;
+        }
+
+        .welcome-text {
+            text-align: left;
+        }
+
+        .welcome-text h2 {
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 1.5;
+            color: #1a1f3a;
+        }
+
+        .right-panel {
+            width: 360px;
+            background: #fff;
+            margin: 20px;
+            border-radius: 10px;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .right-header h2 {
+            font-size: 21px;
+            font-weight: 700;
+            color: #1a1f3a;
+            margin-bottom: 6px;
+        }
+
+        .right-header p {
+            font-size: 13px;
+            color: #334155;
+        }
+
+        .otp-container {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .otp-input {
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            text-align: center;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+            color: #1a1f3a;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .otp-input:focus {
+            border-color: #2a7f8a;
+            box-shadow: 0 0 0 3px rgba(42, 127, 138, 0.1);
+        }
+
+        .submit-btn {
+            background-color: #2a7f8a;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .submit-btn:hover {
+            background-color: #4aa8b2;
+            box-shadow: 0 4px 12px rgba(42, 127, 138, 0.2);
+        }
+
+        .footer-terms {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .footer-terms a {
+            color: #2a7f8a;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="modal">
+        <a href="index.html" class="close-btn">&times;</a>
+
+        <div class="left-panel">
+            <div class="brand-header">
+                <div class="brand-name">Ahana</div>
+            </div>
+
+            <div class="welcome-text">
+                <h2>Welcome to Ahana!<br>India's Demifine Jewellery Brand</h2>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="right-header">
+                <h2>Verify OTP</h2>
+                <p>Enter the 4-digit code sent to your number</p>
+            </div>
+
+            <form action="success.html">
+                <div class="otp-container">
+                    <input type="text" maxlength="1" class="otp-input" autofocus>
+                    <input type="text" maxlength="1" class="otp-input">
+                    <input type="text" maxlength="1" class="otp-input">
+                    <input type="text" maxlength="1" class="otp-input">
+                </div>
+
+                <button type="submit" class="submit-btn">Verify & Proceed</button>
+            </form>
+
+            <div class="footer-terms">
+                Didn't receive the code?<br>
+                <a href="#">Resend OTP</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const inputs = document.querySelectorAll('.otp-input');
+        inputs.forEach((input, index) => {
+            input.addEventListener('keyup', (e) => {
+                if (e.key >= 0 && e.key <= 9) {
+                    if (index < inputs.length - 1) inputs[index + 1].focus();
+                } else if (e.key === 'Backspace') {
+                    if (index > 0) inputs[index - 1].focus();
+                }
+            });
+        });
+    </script>
+    <script>
+        function updateWishlistBadge() {
+            const wishlistStr = localStorage.getItem('ahana_wishlist');
+            let count = 0;
+            if (wishlistStr) {
+                try {
+                    count = JSON.parse(wishlistStr).length;
+                } catch(e) {}
+            }
+            document.querySelectorAll('.icon-btn[title="Wishlist"] .icon-badge').forEach(badge => badge.innerText = count);
+        }
+        document.addEventListener('DOMContentLoaded', updateWishlistBadge);
+    </script>
+    <script>
+        function updateCartBadge() {
+            const cartStr = localStorage.getItem('ahana_cart');
+            let count = 0;
+            if (cartStr) {
+                try { count = JSON.parse(cartStr).length; } catch(e) {}
+            }
+            document.querySelectorAll('.icon-btn[title="Cart"] .icon-badge').forEach(badge => badge.innerText = count);
+        }
+        document.addEventListener('DOMContentLoaded', updateCartBadge);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1079 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahana - Everyday Elevated</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'Kugile Demo';
+            src: url('public/Kugile_Demo.ttf') format('truetype');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1a1f3a;
+            --teal: #2a7f8a;
+            --teal-light: #4aa8b2;
+            --white: #ffffff;
+            --off-white: #f8fafc;
+            --shadow-soft: 0 10px 40px rgba(26, 31, 58, 0.1);
+            --shadow-hover: 0 20px 60px rgba(26, 31, 58, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--navy);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--navy);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--navy);
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--teal);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--teal);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .icon-btn {
+            position: relative;
+            color: var(--navy);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+
+        .icon-btn:hover {
+            color: var(--teal);
+        }
+
+        .icon-btn svg {
+            width: 26px;
+            height: 26px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-badge {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: #000;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(26, 31, 58, 0.4), rgba(42, 127, 138, 0.2));
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero h1 {
+            font-family: 'Kugile Demo', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--navy);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 1.2rem 3rem;
+            border: 2px solid var(--white);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--navy);
+        }
+
+        /* Collections Section */
+        .collections {
+            padding: 120px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--navy), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .collection-card {
+            position: relative;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .collection-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .collection-card:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .collection-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .collection-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .collection-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(26, 31, 58, 0.9));
+            color: var(--white);
+            padding: 3rem 2rem 2rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .collection-card:hover .collection-overlay {
+            transform: translateY(0);
+        }
+
+        .collection-overlay h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .collection-overlay p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 120px 5%;
+            background: var(--off-white);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto 6rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .product-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .product-image {
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img,
+        .product-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--navy);
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--teal);
+            margin-bottom: 1rem;
+        }
+
+        .product-rating {
+            display: flex;
+            gap: 0.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-rating i {
+            color: #fbbf24;
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 0;
+            background: #2d2748;
+        }
+
+        .cta-banner {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 4rem 10%;
+            background-image: url('public/p.PNG');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .cta-text {
+            text-align: right;
+            max-width: 500px;
+            color: var(--white);
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .cta-text h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+
+        .cta-link {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .cta-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1.5px;
+            background: var(--white);
+            transition: width 0.3s ease;
+        }
+
+        .cta-link:hover::after {
+            width: 0%;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--teal);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .feedback-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feedback-reviews {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feedback-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .feedback-container {
+                gap: 2rem;
+                grid-template-columns: 1fr;
+            }
+
+            .feedback-reviews {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .feedback-form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .feedback-reviews {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Ahana</a>
+            <ul class="nav-links" style="margin-right: auto; margin-left: 3rem;">
+                <li><a href="products.html">Collections</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="login.html" class="icon-btn" title="Login">
+                    <svg viewBox="0 0 24 24" style="width: 28px; height: 28px;">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor"></path>
+                        <circle cx="12" cy="7" r="4" stroke="currentColor"></circle>
+                    </svg>
+                </a>
+                <a href="wishlist.html" class="icon-btn" title="Wishlist">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                        </path>
+                    </svg>
+                    <span class="icon-badge">0</span>
+                </a>
+                <a href="cart.html" class="icon-btn" title="Cart">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="icon-badge">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="public/v1.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Everyday<br>Elevated</h1>
+            <p>Demi-fine jewelry for the modern woman who wears her ambition like her favorite necklace.</p>
+            <div class="hero-buttons">
+                <a href="products.html" class="btn-primary">Shop Collection</a>
+                <a href="#collections" class="btn-secondary">Discover More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section id="collections" class="collections fade-in">
+        <div class="section-header">
+            <h2>Our Collections</h2>
+            <p>Minimal pieces designed for every moment. Layer, stack, repeat.</p>
+        </div>
+        <div class="collection-grid">
+            <div class="collection-card">
+                <img src="public/7.png" alt="Essentials Collection">
+                <div class="collection-overlay">
+                    <h3>Essentials</h3>
+                    <p>Timeless basics for everyday wear</p>
+                </div>
+            </div>
+            <div class="collection-card">
+                <img src="public/3.png" alt="Bold Collection">
+                <div class="collection-overlay">
+                    <h3>Bold</h3>
+                    <p>Statement pieces for making moments</p>
+                </div>
+            </div>
+            <div class="collection-card">
+                <img src="public/15.png" alt="Layered Collection">
+                <div class="collection-overlay">
+                    <h3>Layered</h3>
+                    <p>Mix and match for your signature style</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products fade-in" id="products">
+        <div class="section-header">
+            <h2>Trending Now</h2>
+            <p>Our most loved pieces, hand-picked for you.</p>
+        </div>
+        <div class="product-grid">
+            <div class="product-card" data-category="necklaces" data-id="16">
+                <div class="product-image">
+                    <video autoplay loop muted playsinline>
+                        <source src="public/v2.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="product-info">
+                    <h3>Dainty Chain Necklace</h3>
+                    <div class="product-price">₹299</div>
+                    <div class="product-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+            </div>
+            <div class="product-card" data-category="earrings" data-id="26">
+                <div class="product-image">
+                    <video autoplay loop muted playsinline>
+                        <source src="public/v5.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="product-info">
+                    <h3>Modern Hoops</h3>
+                    <div class="product-price">₹145</div>
+                    <div class="product-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+            </div>
+            <div class="product-card" data-category="rings" data-id="27">
+                <div class="product-image">
+                    <video autoplay loop muted playsinline>
+                        <source src="public/v4.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="product-info">
+                    <h3>Pearl Signet Ring</h3>
+                    <div class="product-price">₹120</div>
+                    <div class="product-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+            </div>
+            <div class="product-card" data-category="bracelets" data-id="20">
+                <div class="product-image">
+                    <video autoplay loop muted playsinline>
+                        <source src="public/v3.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="product-info">
+                    <h3>Delicate Bracelet Stack</h3>
+                    <div class="product-price">₹195</div>
+                    <div class="product-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="products.html" class="btn-secondary" style="color: var(--navy); border-color: var(--navy);">View
+                All Products</a>
+        </div>
+    </section>
+    <!-- CTA Section -->
+    <section class="cta-section fade-in">
+        <div class="cta-banner">
+            <div class="cta-text">
+
+                <a href="#contact" class="cta-link">SHOP NOW</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback / Contact Section -->
+    <section id="contact" class="contact fade-in" style="padding: 120px 5%; background: var(--off-white);">
+        <div class="feedback-container">
+            <!-- Left Side: Content & Reviews -->
+            <div style="display: flex; flex-direction: column; gap: 2rem;">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span
+                            style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: #64748b;">Your
+                            Words Matter</span>
+                        <div style="height: 1px; width: 50px; background: #cbd5e1;"></div>
+                    </div>
+                    <h2
+                        style="font-family: 'Kugile Demo', serif; font-size: clamp(2.5rem, 4vw, 3.5rem); color: var(--navy); margin-bottom: 1.5rem; line-height: 1.1;">
+                        We would love to hear<br>about your experience!</h2>
+
+                </div>
+
+                <!-- Customer Reviews -->
+                <div class="feedback-reviews">
+                    <!-- Review 1 -->
+                    <div
+                        style="background: var(--white); padding: 1.5rem; border-radius: 15px; box-shadow: var(--shadow-soft);">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div
+                                style="width: 40px; height: 40px; border-radius: 50%; background: #e2e8f0; overflow: hidden;">
+                                <img src="https://ui-avatars.com/api/?name=Sara+Damotti&background=random"
+                                    alt="Sara Damotti" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div>
+                                <h4 style="font-size: 0.9rem; color: var(--navy); margin: 0;">Sara Damotti</h4>
+                                <span style="font-size: 0.75rem; color: #64748b;">Brand Manager</span>
+                            </div>
+                        </div>
+                        <div style="color: #fbbf24; font-size: 0.8rem; margin-bottom: 0.5rem;">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <h5 style="font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem;">Awesome!</h5>
+                        <p style="font-size: 0.85rem; color: #64748b; line-height: 1.5;">Its the exact product shown in
+                            the image. Great for styling in different occasion and everyday use too.</p>
+                    </div>
+                    <!-- Review 2 -->
+                    <div
+                        style="background: var(--white); padding: 1.5rem; border-radius: 15px; box-shadow: var(--shadow-soft);">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div
+                                style="width: 40px; height: 40px; border-radius: 50%; background: #e2e8f0; overflow: hidden;">
+                                <img src="https://ui-avatars.com/api/?name=Jake+Smith&background=random"
+                                    alt="Jake Smith" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div>
+                                <h4 style="font-size: 0.9rem; color: var(--navy); margin: 0;">Jake Smith</h4>
+                                <span style="font-size: 0.75rem; color: #64748b;">Tech Lead</span>
+                            </div>
+                        </div>
+                        <div style="color: #fbbf24; font-size: 0.8rem; margin-bottom: 0.5rem;">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <h5 style="font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem;">Changed Everything!</h5>
+                        <p style="font-size: 0.85rem; color: #64748b; line-height: 1.5;">My experience was amazing after
+                            purchasing this product. I was eagerly waiting to buy this. Price and quality is amazing you
+                            can buy it.</p>
+                    </div>
+                    <!-- Review 3 -->
+                    <div
+                        style="background: var(--white); padding: 1.5rem; border-radius: 15px; box-shadow: var(--shadow-soft);">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div
+                                style="width: 40px; height: 40px; border-radius: 50%; background: #e2e8f0; overflow: hidden;">
+                                <img src="https://ui-avatars.com/api/?name=Kelly+Williams&background=random"
+                                    alt="Kelly Williams" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div>
+                                <h4 style="font-size: 0.9rem; color: var(--navy); margin: 0;">Kelly Williams</h4>
+                                <span style="font-size: 0.75rem; color: #64748b;">Designer</span>
+                            </div>
+                        </div>
+                        <div style="color: #fbbf24; font-size: 0.8rem; margin-bottom: 0.5rem;">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                class="fas fa-star"></i><i class="far fa-star"></i>
+                        </div>
+                        <h5 style="font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem;">Best Service</h5>
+                        <p style="font-size: 0.85rem; color: #64748b; line-height: 1.5;">They are soooo pretty. So i am
+                            glad i stumbled into Ahana. Thank you and keep up the awesome work. Love and God bless you
+                            all.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Form -->
+            <div
+                style="background: var(--white); padding: 3rem; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); height: fit-content;">
+                <form action="#" method="POST" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div class="feedback-form-row">
+                        <input type="text" placeholder="Full Name" required
+                            style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit; font-size: 0.95rem; width: 100%; box-sizing: border-box;">
+                        <input type="email" placeholder="Your Email" required
+                            style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit; font-size: 0.95rem; width: 100%; box-sizing: border-box;">
+                    </div>
+                    <input type="text" placeholder="Company Name"
+                        style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit; font-size: 0.95rem; width: 100%; box-sizing: border-box;">
+                    <input type="text" placeholder="Review Title" required
+                        style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit; font-size: 0.95rem; width: 100%; box-sizing: border-box;">
+
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label style="font-weight: 500; font-size: 0.9rem; color: var(--navy);">Your Rating</label>
+                        <div style="color: #cbd5e1; font-size: 1.2rem; cursor: pointer;">
+                            <i class="fas fa-star" style="color: #fbbf24;"></i>
+                            <i class="fas fa-star" style="color: #fbbf24;"></i>
+                            <i class="fas fa-star" style="color: #fbbf24;"></i>
+                            <i class="fas fa-star" style="color: #fbbf24;"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+
+                    <textarea placeholder="Write Feedback" rows="4" required
+                        style="padding: 1rem; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit; resize: vertical; font-size: 0.95rem; width: 100%; box-sizing: border-box;"></textarea>
+
+                    <div style="display: flex; align-items: flex-start; gap: 0.5rem;">
+                        <input type="checkbox" id="privacy" required
+                            style="width: 16px; height: 16px; cursor: pointer; margin-top: 0.2rem;">
+                        <label for="privacy"
+                            style="font-size: 0.85rem; color: #64748b; cursor: pointer; line-height: 1.4;">We care about
+                            protecting your data. Here's our <a href="#"
+                                style="color: var(--navy); font-weight: 600; text-decoration: none;">Privacy
+                                Policy.</a></label>
+                    </div>
+
+                    <button type="submit"
+                        style="background: #6b7280; color: white; border: none; cursor: pointer; padding: 1rem 2rem; border-radius: 8px; font-weight: 600; font-size: 1rem; align-self: flex-start; transition: all 0.3s ease;">Submit
+                        Review</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Ahana</h4>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">Everyday elevated. Jewelry that moves with
+                    you.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#"><i class="fab fa-instagram" style="font-size: 1.5rem;"></i></a>
+                    <a href="#"><i class="fab fa-tiktok" style="font-size: 1.5rem;"></i></a>
+                    <a href="#"><i class="fab fa-pinterest" style="font-size: 1.5rem;"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Shop</h4>
+                <a href="#">Essentials</a>
+                <a href="#">Bold</a>
+                <a href="#">Layered</a>
+                <a href="#">New Arrivals</a>
+                <a href="#">Best Sellers</a>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="#">Careers</a>
+                <a href="#">Press</a>
+                <a href="#">Sustainability</a>
+            </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <a href="#contact">Contact</a>
+                <a href="#">Shipping</a>
+                <a href="#">Returns</a>
+                <a href="#">FAQ</a>
+                <a href="#">Size Guide</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Ahana. Made with love. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const heroHeight = document.querySelector('.hero').offsetHeight;
+
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.8)';
+                header.style.boxShadow = '0 10px 40px rgba(26, 31, 58, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.7)';
+                header.style.boxShadow = 'none';
+            }
+
+            // Keep fixed during hero section, then scroll away
+            if (window.scrollY > heroHeight) {
+                header.style.position = 'absolute';
+                header.style.top = heroHeight + 'px';
+            } else {
+                header.style.position = 'fixed';
+                header.style.top = '0';
+            }
+        });
+
+        // Scroll reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate', 'visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe collection cards
+        document.querySelectorAll('.collection-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Observe product cards
+        document.querySelectorAll('.product-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Observe fade-in sections
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Hero animation stagger
+        window.addEventListener('load', () => {
+            document.querySelector('.hero-content').style.animationDelay = '0.3s';
+        });
+
+        // Redirect to detail page
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const id = card.dataset.id;
+                if (id) window.location.href = `product-${id}.html`;
+            });
+        });
+
+    </script>
+    <script>
+        function updateWishlistBadge() {
+            const wishlistStr = localStorage.getItem('ahana_wishlist');
+            let count = 0;
+            if (wishlistStr) {
+                try {
+                    count = JSON.parse(wishlistStr).length;
+                } catch (e) { }
+            }
+            document.querySelectorAll('.icon-btn[title="Wishlist"] .icon-badge').forEach(badge => badge.innerText = count);
+        }
+        document.addEventListener('DOMContentLoaded', updateWishlistBadge);
+    </script>
+    <script>
+        function updateCartBadge() {
+            const cartStr = localStorage.getItem('ahana_cart');
+            let count = 0;
+            if (cartStr) {
+                try { count = JSON.parse(cartStr).length; } catch (e) { }
+            }
+            document.querySelectorAll('.icon-btn[title="Cart"] .icon-badge').forEach(badge => badge.innerText = count);
+        }
+        document.addEventListener('DOMContentLoaded', updateCartBadge);
+    </script>
+</body>
+
+</html>

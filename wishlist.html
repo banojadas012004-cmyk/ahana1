@@ -1,0 +1,450 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - Ahana</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1a1f3a;
+            --teal: #2a7f8a;
+            --teal-light: #4aa8b2;
+            --white: #ffffff;
+            --off-white: #f8fafc;
+            --shadow-soft: 0 10px 40px rgba(26, 31, 58, 0.05);
+            --shadow-hover: 0 20px 60px rgba(26, 31, 58, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--off-white);
+            color: var(--navy);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--white);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--navy);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--navy);
+            font-weight: 500;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .icon-btn {
+            position: relative;
+            color: var(--navy);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+        }
+
+        .icon-btn:hover {
+            color: var(--teal);
+        }
+
+        .icon-btn svg {
+            width: 26px;
+            height: 26px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-badge {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: #000;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 5%;
+            min-height: 50vh;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-wishlist {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .empty-wishlist i {
+            font-size: 4rem;
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-wishlist p {
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--teal);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--teal-light);
+            transform: translateY(-2px);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .product-image {
+            height: 300px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ef4444;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+        }
+
+        .remove-btn:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            color: var(--navy);
+            text-decoration: none;
+            display: block;
+        }
+
+        .product-price {
+            color: var(--teal);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 0.8rem;
+            margin-top: 1rem;
+            background: var(--white);
+            border: 1px solid var(--navy);
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 4rem 5%;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav
+            style="width: 100%; max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" class="logo">Ahana</a>
+            <ul class="nav-links" style="margin-right: auto; margin-left: 3rem;">
+                <li><a href="products.html">Collections</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="endterm.html#contact">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <a href="login.html" class="icon-btn" title="Login">
+                    <svg viewBox="0 0 24 24" style="width: 28px; height: 28px;">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor"></path>
+                        <circle cx="12" cy="7" r="4" stroke="currentColor"></circle>
+                    </svg>
+                </a>
+                <a href="wishlist.html" class="icon-btn" title="Wishlist">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                        </path>
+                    </svg>
+                    <span class="icon-badge">0</span>
+                </a>
+                <a href="cart.html" class="icon-btn" title="Cart">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="icon-badge">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">My Wishlist</h1>
+        </div>
+
+        <div id="wishlist-content">
+            <!-- Rendered by JS -->
+        </div>
+    </main>
+
+    <footer>
+        <div style="max-width: 1400px; margin: 0 auto; text-align: center;">
+            <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 1rem;">Ahana</h2>
+            <p style="opacity: 0.7;">&copy; 2026 Ahana. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const wishlistStr = localStorage.getItem('ahana_wishlist');
+            let wishlist = [];
+            if (wishlistStr) {
+                try {
+                    wishlist = JSON.parse(wishlistStr);
+                } catch (e) { }
+            }
+
+            const badge = document.getElementById('wishlist-badge');
+            if (badge) badge.innerText = wishlist.length;
+
+            const container = document.getElementById('wishlist-content');
+
+            function render() {
+                if (wishlist.length === 0) {
+                    container.innerHTML =
+                        `<div class="empty-wishlist">
+                            <i class="far fa-heart"></i>
+                            <h2 style="margin-bottom: 1rem;">Your wishlist is empty</h2>
+                            <p>Save items you love so you won't lose sight of them.</p>
+                            <a href="products.html" class="btn-primary">Explore Products</a>
+                        </div>`
+                        ;
+                    return;
+                }
+
+                let html = '<div class="product-grid">';
+                wishlist.forEach((item, idx) => {
+                    html +=
+                        `<div class="product-card">
+                            <button class="remove-btn" onclick="removeFromWishlist(${idx})" title="Remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <a href="${item.url || '#'}">
+                                <img src="${item.image || ''}" alt="${item.title || ''}" class="product-image">
+                            </a>
+                            <div class="product-info">
+                                <a href="${item.url || '#'}" class="product-title">${item.title || ''}</a>
+                                <div class="product-price">${item.price || ''}</div>
+                                <button class="add-to-cart-btn" onclick="moveToCart(${idx})">Add to Cart</button>
+                            </div>
+                        </div>`
+                        ;
+                });
+                html += '</div>';
+                container.innerHTML = html;
+            }
+
+            render();
+
+            window.removeFromWishlist = function (index) {
+                wishlist.splice(index, 1);
+                localStorage.setItem('ahana_wishlist', JSON.stringify(wishlist));
+                if (badge) badge.innerText = wishlist.length;
+                render();
+            }
+
+            window.moveToCart = function (index) {
+                const item = wishlist[index];
+
+                // Add to cart
+                const cartStr = localStorage.getItem('ahana_cart');
+                let cart = [];
+                if (cartStr) {
+                    try { cart = JSON.parse(cartStr); } catch (e) { }
+                }
+
+                // Check if item already exists in cart
+                const exists = cart.some(cartItem => cartItem.title === item.title);
+                if (!exists) {
+                    cart.push(item);
+                    localStorage.setItem('ahana_cart', JSON.stringify(cart));
+
+                    // Update cart badge
+                    const cartBadges = document.querySelectorAll('.icon-btn[title="Cart"] .icon-badge');
+                    cartBadges.forEach(badge => badge.innerText = cart.length);
+
+                    // Remove from wishlist
+                    wishlist.splice(index, 1);
+                    localStorage.setItem('ahana_wishlist', JSON.stringify(wishlist));
+                    if (badge) badge.innerText = wishlist.length;
+
+                    render();
+
+                    // Show success message
+                    const btn = event.currentTarget;
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-check"></i> Added to Cart!';
+                    btn.style.background = '#4ade80';
+                    btn.style.color = '#fff';
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.style.background = '';
+                        btn.style.color = '';
+                    }, 2000);
+                } else {
+                    alert('This item is already in your cart!');
+                }
+            }
+        });
+    </script>
+    <script>
+
+    </script>
+    <script>
+        function updateWishlistBadge() {
+            const wishlistStr = localStorage.getItem("ahana_wishlist");
+            let count = 0;
+            if (wishlistStr) {
+                try {
+                    count = JSON.parse(wishlistStr).length;
+                } catch (e) { }
+            }
+            document.querySelectorAll(".icon-btn[title=Wishlist] .icon-badge").forEach(badge => badge.innerText = count);
+        }
+        document.addEventListener("DOMContentLoaded", updateWishlistBadge);
+    </script>
+    <script>
+        function updateCartBadge() {
+            const cartStr = localStorage.getItem("ahana_cart");
+            let count = 0;
+            if (cartStr) {
+                try { count = JSON.parse(cartStr).length; } catch (e) { }
+            }
+            document.querySelectorAll(".icon-btn[title=Cart] .icon-badge").forEach(badge => badge.innerText = count);
+        }
+        document.addEventListener("DOMContentLoaded", updateCartBadge);
+    </script>
+</body>
+
+</html>
